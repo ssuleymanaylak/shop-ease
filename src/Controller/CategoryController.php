@@ -39,7 +39,7 @@ final class CategoryController extends AbstractController
 
             return $this->redirectToRoute('app_category');
         }
-        return $this->render('admin/category/new.html.twig',['form'=>$form->createView()]);
+        return $this->render('admin/category/new.html.twig',['form'=>$form->createView(),'isEdit' => false]);
     }
 
     #[Route('admin/category/{id}', name: 'app_category_show')]
@@ -48,5 +48,33 @@ final class CategoryController extends AbstractController
         return $this->render('admin/category/show.html.twig', [
             'category' => $category,
         ]);
+    }
+
+    #[Route('admin/category/edit/{id}', name: 'app_category_edit')]
+    public function edit(EntityManagerInterface $em, Request $request, Category $category):Response
+    {
+        $form = $this->createForm(CategoryType::class,$category);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em->flush();
+
+            $this->addFlash('success','Category updated successfully!');
+
+            return $this->redirectToRoute('app_category');
+        }
+        return $this->render('admin/category/new.html.twig',['form'=>$form->createView(),'isEdit'=>true,]);
+    }
+
+    #[Route('admin/category/delete/{id}', name: 'app_category_delete', methods: ['POST'])]
+    public function delete(EntityManagerInterface $em, Category $category): Response
+    {
+        $em->remove($category);
+        $em->flush();
+        $this->addFlash('success','Category deleted successfully!');
+
+
+        return $this->redirectToRoute('app_category');
     }
 }

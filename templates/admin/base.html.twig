@@ -10,6 +10,7 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="bg-gray-100 text-gray-900">
 
@@ -75,6 +76,27 @@
                 }
                 reader.readAsDataURL(file);
             }
+        }
+    </script>
+
+    <!-- Confirm Delete Script -->
+    <script>
+        function confirmDelete(productId) {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to undo this action!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + productId).submit();
+                }
+            })
         }
     </script>
 

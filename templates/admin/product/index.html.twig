@@ -31,7 +31,7 @@
                                 <td class="py-4 px-6 font-semibold text-gray-500">{{loop.index}}</td>
                                 <td class="py-4 px-6">
                                 {% if product.image %}
-                                    <img src="" alt="{{product.name}}" class="h-12 w-12 object-cover rounded-md border border-gray-300 shadow-sm" width="75" height="75">
+                                    <img src="{{ asset('uploads/product_images/' ~ product.image) }}" alt="{{product.name}}" class="h-12 w-12 object-cover rounded-md border border-gray-300 shadow-sm" width="75" height="75">
                                 {% else %}
                                     <span class="text-gray-400 italic">No image</span>
                                 {% endif %}
