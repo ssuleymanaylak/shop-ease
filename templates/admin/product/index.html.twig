@@ -39,7 +39,7 @@
                                 <td class="py-4 px-6 font-medium text-gray-900">{{product.name}}</td>
                                 <td class="py-4 px-6">{{product.category.name}}</td>
                                 <td class="py-4 px-6 font-medium text-gray-900">{{product.price|number_format(2)}}</td>
-                                <td class="py-4 px-6"><a href="" class="inline-flex items-center gap-3 text-blue-600 hover:text-blue-800 transition" title="View Product"><span class="hidden sm:inline">View</span></a></td>
+                                <td class="py-4 px-6"><a href="{{path('app_product_show',{'id':product.id})}}" class="inline-flex items-center gap-3 text-blue-600 hover:text-blue-800 transition" title="View Product"><span class="hidden sm:inline">View</span></a></td>
                             </tr>
                         {% else %}
                             <tr>

@@ -5,7 +5,7 @@ namespace App\Service;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class UpladerHelper
+class UploaderHelper
 {
     private $uploadsPath;
     private $slugger;
@@ -33,6 +33,15 @@ class UpladerHelper
     public function getTargetDirectory():string
     {
         return $this->uploadsPath.'/product_images';
+    }
+
+    public function deleteProductImage(string $filename):void
+    {
+        $filePath = $this->getTargetDirectory().'/'.$filename;
+
+        if(file_exists($filePath)){
+            unlink($filePath);
+        }
     }
 
 }
